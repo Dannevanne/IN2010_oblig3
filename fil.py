@@ -1,4 +1,4 @@
-#Er et par ting som må rettes opp, men tror jeg er inne på noe
+#Får ca riktig antall noder, men får nesten dobbelt så mange kanter som antatt i oppgaven
 from collections import defaultdict
 
 class Graf:
