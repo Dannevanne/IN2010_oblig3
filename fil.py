@@ -1,9 +1,10 @@
-#Får ca riktig antall noder, men får nesten dobbelt så mange kanter som antatt i oppgaven
 from collections import defaultdict
 
 class Graf:
 
     def __init__(self):
+        self.V = set()
+        self.E = set()
         self.skuespillere = {}
         self.filmer = {}
         self.skuespillere_i_film = defaultdict(list)
@@ -22,6 +23,7 @@ class Graf:
                 parts = line.strip().split("\t")
                 nmId, name, tt_id = parts[0], parts[1], parts[2:]
                 self.skuespillere[nmId] = tt_id
+                self.V.add(nmId)
 
     def film_til_skuespillere(self):
         for skuespiller in self.skuespillere:
@@ -35,17 +37,14 @@ class Graf:
             rating = self.filmer[tt_id]
             for i in range(len(skuespillere)):
                 for j in range(i+1, len(skuespillere)):
-                    self.graf[skuespillere[i]].append((skuespillere[j], tt_id, rating))
-                    self.graf[skuespillere[j]].append((skuespillere[i], tt_id, rating))
+                    a, b = skuespillere[i], skuespillere[j]
+                    self.graf[a].append((b, tt_id, rating))
+                    self.graf[b].append((a, tt_id, rating))
+                    self.E.add(frozenset({a, b}))
 
     def ant_noder_og_kanter(self):
-        ant_noder = 0
-        ant_kanter = 0
-        for node in self.graf:
-            ant_noder += 1
-            for kanter in self.graf[node]:
-                ant_kanter += 1
-        
+        ant_noder = len(self.V)
+        ant_kanter = len(self.E)
         return ant_noder, ant_kanter
 
 def main():
