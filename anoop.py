@@ -25,7 +25,7 @@ def les_filmer(filnavn):
                 continue  # hopper over tomme eller ugyldige linjer
             tt_id = parts[0]
             title = parts[1]
-            rating_str = parts[2].split()[0] #Fordi rating og antall stemmer ble lagret sammen? - så la på split for å løse det
+            rating_str = parts[2].split()[0] #Fordi rating og antall stemmer ble lagret sammen i parts[2] (?)- så la på split og da index [0] for å løse det
             rating = float(rating_str)
             films[tt_id] = Film(tt_id, title, rating)
     return films
@@ -86,8 +86,8 @@ for nm_id in actors.keys():
 
 #Antall noder og kanter - Oppgave 1
 print("\nOppgave 1")
-print("Antall skuespillere (noder):", len(actors))
-print("Antall kanter (filmer som forbinder skuespillere):", len(edges))
+print("Antall noder (skuespillere):", len(actors))
+print("Antall kanter (filmer som binder skuespillerne):", len(edges))
 
 
 #Komponenter - Oppgave 2
